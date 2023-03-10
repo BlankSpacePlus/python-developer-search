@@ -1,0 +1,16 @@
+.idea
+.DS_Store
+*.log
+/data/index/
+code-snippet.txt
+java-code-selection.train
+query.txt
+query_code_json.json
+/data_*/
+/model/bert/
+/model/code_selector/
+/model/t5_paraphrase/
+check_train_data.py
+query_code_pair_get_*.py
+query_code_pair_search.py
+/src/__pycache__/

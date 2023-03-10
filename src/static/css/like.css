@@ -1,0 +1,31 @@
+.dian {
+    display: flex;
+    flex-direction: row;
+}
+
+#like,
+#dislike {
+    width: 55px;
+    height: 22px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: #F3F3F3;
+    margin: 0 10px;
+    border-radius: 6px;
+    user-select: none;
+    cursor: pointer;
+}
+
+#like img,
+#dislike img {
+    width: 14px;
+    height: 14px;
+    margin: 5px 5px 0 5px;
+}
+
+#like #num1,
+#dislike #num2 {
+    line-height: 22px;
+    margin-right: 3px;
+}
