@@ -1,0 +1,12 @@
+apex==0.9.10.dev0
+Flask==2.2.3
+more_itertools==9.1.0
+numpy==1.21.6
+pandas==1.1.5
+ptvsd==4.3.2
+scikit_learn==1.2.2
+tensorboardX==2.6
+torch==2.0.0
+tqdm==4.65.0
+transformers==3.0.0
+Whoosh==2.7.4

@@ -6,11 +6,11 @@ code-snippet.txt
 java-code-selection.train
 query.txt
 query_code_json.json
+/data/codesearch/
 /data_*/
-/model/bert/
-/model/code_selector/
-/model/t5_paraphrase/
+/model/*/
 check_train_data.py
 query_code_pair_get_*.py
 query_code_pair_search.py
 /src/__pycache__/
+/src/runs/
