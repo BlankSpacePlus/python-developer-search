@@ -2,10 +2,12 @@ import json
 from query_rewriter_model import QueryRewriter
 import re
 
+
 cnt = 1
 query_code_list = []
 query_rewriter_model = QueryRewriter()
 
+# https://drive.google.com/file/d/1w8GKMmVVYufIr0F0JlxL7T9d880K-2mc/view?usp=share_link
 for line in open("../data/java-code-selection.train"):
     line_elements = re.split(r'\t', line)
     query = line_elements[1]
