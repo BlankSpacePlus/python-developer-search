@@ -59,4 +59,3 @@ class CodeSelector(object):
             score = self.get_score(question, cs)
             candidate_scores.append(score)
         return candidate_scores
-

@@ -9,7 +9,7 @@ query_code_json.json
 /data/codesearch/
 /data_*/
 /model/*/
-check_train_data.py
+check_code_selection_data.py
 query_code_pair_get_*.py
 query_code_pair_search.py
 /src/__pycache__/

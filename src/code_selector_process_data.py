@@ -2,7 +2,6 @@ import json
 from query_rewriter_model import QueryRewriter
 import re
 
-
 cnt = 1
 query_code_list = []
 query_rewriter_model = QueryRewriter()
