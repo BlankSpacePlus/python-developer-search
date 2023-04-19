@@ -24,7 +24,7 @@ def index():
     ip = request.environ.get('HTTP_X_REAL_IP', request.remote_addr)
     t = time.strftime("%Y-%m-%dT%H:%M:%S", time.localtime())
     print('ip:', ip, 't:', t)
-    with open("../log/main.log", "a", encoding="UTF-8") as f:
+    with open("../log/qa_search.log", "a", encoding="UTF-8") as f:
         # 追加写模式
         f.write(f"{ip} {t}\n")
     return render_template('index.html')
@@ -34,21 +34,11 @@ def index():
 def search(query):
     begin_time = time.time()
     print(query)
-    print(type(query))
-    r = list()
-    global INDEX, PARSER
-    q = PARSER.parse(query)
-    with INDEX.searcher() as s:
-        results = s.search(q, limit=10)
-        # 必须要放在里面，searcher关闭之后就不能读了
-        result_count = len(results)
-        if result_count != 0:
-            r = [_["qc"] for _ in results[:5]]  # 取前5个结果
-            print(r)
+    result, result_count = get_qa_top_k(query)
     end_time = time.time()
     run_time = round(end_time - begin_time, 2)
     run_time = str(run_time)
-    return jsonify({"result": r, 'run_time': run_time, 'result_num': result_count})
+    return jsonify({"result": result, 'run_time': run_time, 'result_num': result_count})
 
 
 def init_index():
@@ -87,7 +77,19 @@ def init_index():
     PARSER = parser
 
 
-def 
+def get_qa_top_k(query: str, k: int = 5):
+    init_index()
+    result = list()
+    global INDEX, PARSER
+    q = PARSER.parse(query)
+    with INDEX.searcher() as s:
+        results = s.search(q, limit=10)
+        # 必须要放在里面，searcher关闭之后就不能读了
+        result_count = len(results)
+        if result_count != 0:
+            result = [_["qc"] for _ in results[:k]]  # 取前5个结果
+            print(result)
+    return result, result_count
 
 
 INDEX = None
