@@ -52,7 +52,7 @@ def search(query):
 
 
 def init_index():
-    # https://whoosh.readthedocs.io/en/latest/schema.html
+    # Schema用法详见 https://whoosh.readthedocs.io/en/latest/schema.html
     schema = Schema(re_query=TEXT(stored=False, analyzer=StemmingAnalyzer()), qc=STORED())
     files = ["query_code_json"]
     query_code_list = list()
@@ -85,6 +85,9 @@ def init_index():
     global INDEX, PARSER
     INDEX = data_index
     PARSER = parser
+
+
+def 
 
 
 INDEX = None

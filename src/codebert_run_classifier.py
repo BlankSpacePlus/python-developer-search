@@ -273,6 +273,9 @@ def evaluate(args, model, tokenizer, checkpoint=None, prefix="", mode='dev'):
                         [item.encode('ascii', 'ignore').decode('ascii') for item in instances[i]])
 
                     writer.write(instance_rep + '<CODESPLIT>' + '<CODESPLIT>'.join([str(l) for l in logit]) + '\n')
+                    # for item in instances[i]:
+                    #     print(item)
+                    # print(logit)
                 for key in sorted(result.keys()):
                     print("%s = %s" % (key, str(result[key])))
 
