@@ -13,7 +13,7 @@ class SearchEngine:
     def __init__(self):
         self.index_name = "search_engine"
         self.ip = "http://localhost:9200"
-        self.es = Elasticsearch(self.ip)
+        self.es = Elasticsearch(self.ip, timeout=30, max_retries=10, retry_on_timeout=True)
         self.indices = self.es.indices
 
     def create_index(self):
@@ -73,7 +73,7 @@ class SearchEngine:
         print(self.indices.put_settings(index=self.index))
 
     def fill_data(self, path):
-        for i in range(1):  # 166
+        for i in range(166): # 166
             print(i)
             body = code_matcher_utils.load_pkl(path + 'data' + str(i) + '.pkl')
             helpers.bulk(self.es, body, )
@@ -101,7 +101,7 @@ class SearchEngine:
 
     def filter_data(self, path):
         hash_set = set()
-        for i in range(1):  # 166
+        for i in range(166):
             body = []
             data = code_matcher_utils.load_pkl(path + 'data' + str(i) + '.pkl')
             for j in range(len(data)):
@@ -115,7 +115,7 @@ class SearchEngine:
             print()
 
     def clean_data(self, path):
-        for i in range(1):  # 166
+        for i in range(166):
             body = []
             data = code_matcher_utils.load_pkl(path + 'body' + str(i) + '.pkl')
             for j in range(len(data)):
@@ -190,7 +190,7 @@ class SearchEngine:
 
     def search_respond_more(self, cmd, source_hash, n_data, query):
         query = {"query": {"match": {"source": query.lower()}}}
-        scan_resp = helpers.scan(self.es, query, index=self.index, scroll="10m")
+        scan_resp = helpers.scan(self.es, query, index=self.index_name, scroll="10m")
         respond = []
         query_cmd = []
         for hit in scan_resp:
@@ -219,7 +219,7 @@ class SearchEngine:
             query = {"query": {"match": {"source": cmd.lower()}}}
         else:
             query = {"query": {"regexp": {"method": cmd.lower()}}}
-        scan_resp = helpers.scan(self.es, query, index=self.index, scroll="10m")
+        scan_resp = helpers.scan(self.es, query, index=self.index_name, scroll="10m")
         respond = []
         query_cmd = []
         idx = 0
@@ -250,4 +250,4 @@ class SearchEngine:
 if __name__ == '__main__':
     se = SearchEngine()
     se.create_index()
-    se.fill_data('unzipdata/')
+    se.fill_data('../data/codesearch/data_source/')

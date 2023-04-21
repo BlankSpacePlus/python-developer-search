@@ -14,7 +14,6 @@ def matcher_name(words, line, cmd):
     """
     cmd = str(cmd).replace('.*', ' ').strip().split(' ')
     line = str(line).replace('\n', '')
-
     word_usage = len(cmd) / len(words)
     line_coverage = len(''.join(cmd)) / len(line)
     score = word_usage * line_coverage
@@ -43,7 +42,6 @@ def matcher_api(query, line, jdk):
     word_usage = count / len(query)
     line_coverage = freq / len(line)
     max_sequence = len(sequence(index)) / len(query)
-
     apis = line.split(',')
     api_count = 0
     jdk_count = 0
@@ -57,7 +55,6 @@ def matcher_api(query, line, jdk):
     jdk_percent = 0
     if api_count > 0:
         jdk_percent = jdk_count / api_count
-
     score = word_usage * line_coverage * max_sequence * jdk_percent
     return score
 
@@ -71,11 +68,9 @@ def sequence(seq):
             orders.append([si])
         for k in range(len(orders)):
             sik = orders[k][-1]
-
             for j in range(i + 1, len(seq)):
                 for l in range(len(seq[j])):
                     sjl = seq[j][l]
-
                     if sik < sjl:
                         temp = []
                         temp.extend(orders[k])
@@ -94,11 +89,8 @@ def reranking(query_parse, data, cmds, jdk):
     :param cmds: 模糊查询结果列表对应的查询正则表达式
     :return:展示给用户的结果
     """
-    # jdk = code_matcher_utils.load_pkl('data/jdk_vocab.pkl')
     query = query_parse[0]
-
     lines = []
-
     scores = list()
     for j in range(len(data)):
         res = data[j]['_source']
@@ -106,7 +98,6 @@ def reranking(query_parse, data, cmds, jdk):
         cmd = cmds[j]
         scores.append([j, matcher_name(query, line, cmd)])
     scores.sort(key=operator.itemgetter(1), reverse=True)
-
     scores = scores[:100]
     for j in range(len(scores)):
         idx = scores[j][0]
@@ -114,14 +105,12 @@ def reranking(query_parse, data, cmds, jdk):
         line = res['parsed']
         scores[j].append(matcher_api(query, line, jdk))
     scores.sort(key=operator.itemgetter(1, 2), reverse=True)
-
     count = 10
     if len(data) < 10:
         count = len(data)
     for j in range(count):
         idx = scores[j][0]
         line = str(data[idx]['_source']['source'])
-
         token = 'for (int'
         if line.find(token) > -1:
             l = ''
@@ -141,12 +130,8 @@ def reranking(query_parse, data, cmds, jdk):
                     else:
                         kk += keyy + dd[m]
                 kk += dd[-1]
-
-                # dd = dd[0] + keyy.join(dd[1:])
                 l += token + ' ' + key + kk + db[di:]
             line = l
             print()
-
         lines.append(line)
-
     return lines

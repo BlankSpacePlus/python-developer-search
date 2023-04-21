@@ -83,8 +83,8 @@ def     parse(query):
     :return: 一个列表，列表中的第一个元素为处理后的查询词列表，第二个元素为单词列表的importance
     """
     items = query_parse(query,
-                        path_parsed_vocab='data/parsed_vocab_jdk_item.pkl',
-                        path_method_vocab='data/method_vocab_stemed.pkl')
+                        path_parsed_vocab='../data/parsed_vocab_jdk_item.pkl',
+                        path_method_vocab='../data/method_vocab_stemed.pkl')
 
     # sorting words
     mid_list1 = list()  #重要性为1的连词等
