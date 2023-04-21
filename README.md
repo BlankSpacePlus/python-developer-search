@@ -1,6 +1,40 @@
-# 开发者搜索 Developer Search
+# 开发者搜索 Developer Search ![](./src/static/img/favicon.ico)
 
-![](./images/stack-overflow.png)
+## 软件依赖
+
+- 开发工具
+    - Visual Studio Code
+        - [Linux服务器远程连接](https://blankspace.blog.csdn.net/article/details/127764676)
+        - [VSCode通过虚拟环境运行Python程序](https://blankspace.blog.csdn.net/article/details/127766482)
+    - Chrome
+    - Xshell
+        - [Linux服务器远程连接](https://blankspace.blog.csdn.net/article/details/127764676)
+    - Xftp
+        - [Linux服务器远程连接](https://blankspace.blog.csdn.net/article/details/127764676)
+- 开发语言
+    - Python
+    - JavaScript
+- 软件工具
+    - Elasticsearch
+        - 软件版本：7.0.1 (锁版本)
+        - 下载链接：`wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-7.0.1-linux-x86_64.tar.gz`
+        - 解压文件：`tar -zxvf elasticsearch-7.0.1-linux-x86_64.tar.gz`
+        - 开启窗口：`screen -S es`
+        - 启动程序：`./elasticsearch-7.0.1-linux-x86_64/bin/elasticsearch`
+        - 隐藏窗口：Ctrl + A + D
+        - 检验启动：`curl localhost:9200`
+    - Miniconda/Anaconda (不锁版本)
+        - [Python开发环境搭建](https://blankspace.blog.csdn.net/article/details/129352680)
+        - [Python包管理工具pip](https://blog.csdn.net/weixin_43896318/article/details/115771621)
+
+## 启动运行
+
+1. 下载并安装Conda环境(Anaconda或Miniconda)
+2. 创建虚拟环境：`conda create --name developer_search python==3.8`
+3. 进入虚拟环境：`conda activate developer_search`
+4. 切换到`src`目录(cd命令)
+5. 下载项目依赖(pip)：`pip install -r requirements.txt`
+6. 启动Flask：`python developer_search.py`
 
 ## 工程结构
 
@@ -223,6 +257,7 @@
 │&nbsp;&nbsp;&nbsp;├──&nbsp;query_code_json.json<br>
 │&nbsp;&nbsp;&nbsp;└──&nbsp;query.txt<br>
 ├──&nbsp;images<br>
+│&nbsp;&nbsp;&nbsp;└──&nbsp;code-search-net.png<br>
 │&nbsp;&nbsp;&nbsp;└──&nbsp;stack-overflow.png<br>
 ├──&nbsp;LICENSE<br>
 ├──&nbsp;log<br>
@@ -315,7 +350,6 @@
 &nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;├──&nbsp;query_rewriter_model.cpython-37.pyc<br>
 &nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;└──&nbsp;util.cpython-37.pyc<br>
 &nbsp;&nbsp;&nbsp;&nbsp;├──&nbsp;qa_search.py<br>
-&nbsp;&nbsp;&nbsp;&nbsp;├──&nbsp;query_code_pair_search.py<br>
 &nbsp;&nbsp;&nbsp;&nbsp;├──&nbsp;query_rewriter_model.py<br>
 &nbsp;&nbsp;&nbsp;&nbsp;├──&nbsp;query_rewriter_test.py<br>
 &nbsp;&nbsp;&nbsp;&nbsp;├──&nbsp;runs<br>
@@ -326,6 +360,7 @@
 &nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;├──&nbsp;index.css<br>
 &nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;├──&nbsp;like.css<br>
 &nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;├──&nbsp;load.css<br>
+&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;├──&nbsp;prism.css<br>
 &nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;├──&nbsp;style.css<br>
 &nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;└──&nbsp;waitMe.css<br>
 &nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;├──&nbsp;img<br>
@@ -340,6 +375,7 @@
 &nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;├──&nbsp;jquery.codestyle.js<br>
 &nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;├──&nbsp;jquery.codestyle.min.js<br>
 &nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;├──&nbsp;like.js<br>
+&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;├──&nbsp;prism.js<br>
 &nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;└──&nbsp;wait.js<br>
 &nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;└──&nbsp;lib<br>
 &nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├──&nbsp;bootstrap-4.1.3-dist<br>
@@ -373,7 +409,7 @@
 ## 数据获取
 
 - CodeSearchNet
-    - [CodeSearchNet Challenge: Evaluating the State of Semantic Code Search](https://arxiv.org/abs/1909.09436)
+    - [CodeSearchNet Challenge: Evaluating the State of Semantic Code Search](https://arxiv.org/abs/1909.09436)<br>![](./images/code-search-net.png)
     - [GitHub Repository](https://github.com/github/CodeSearchNet)
     - 数据示例：
         ```javascript
@@ -394,7 +430,7 @@
         ```
 - StackExchange
     - [StackExchange](https://stackexchange.com)
-    - [StackOverflow](https://stackoverflow.com)
+    - [StackOverflow](https://stackoverflow.com)<br>![](./images/stack-overflow.png)
     - 数据示例：
         ```javascript
         {
@@ -406,12 +442,16 @@
             }
       },
         ```
+- CodeMacher
+    - 百度网盘：[https://pan.baidu.com/s/13Ge4EhUjyN-XTtA2mUBlLg](https://pan.baidu.com/s/13Ge4EhUjyN-XTtA2mUBlLg)&nbsp; key: `txs6`
+    - 谷歌云盘：[https://drive.google.com/drive/folders/1c5GHMlBfclr6U27vn5Vy10V8RiHBcASs](https://drive.google.com/drive/folders/1c5GHMlBfclr6U27vn5Vy10V8RiHBcASs)
 
 ## 模型选择
 
 - BERT
     - [BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding](https://aclanthology.org/N19-1423/)
     - [GitHub Repository](https://github.com/google-research/bert)
+    - [Hugging Face Model](https://huggingface.co/bert-base-uncased)
 - T5
     - [Exploring the Limits of Transfer Learning with a Unified Text-to-Text Transformer](https://jmlr.org/papers/v21/20-074.html)
     - [GitHub Repository](https://github.com/google-research/text-to-text-transfer-transformer)
@@ -423,3 +463,4 @@
 - CodeBERT
     - [CodeBERT: A Pre-Trained Model for Programming and Natural Languages](https://aclanthology.org/2020.findings-emnlp.139)
     - [GitHub Repository](https://github.com/microsoft/CodeBERT)
+    - [Hugging Face Model](https://huggingface.co/microsoft/codebert-base)
