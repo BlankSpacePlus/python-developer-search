@@ -1,11 +1,14 @@
 .idea
 .DS_Store
 *.log
+/data/api_index/
 /data/index/
+api_json.json
 code-snippet.txt
 java-code-selection.train
 query.txt
 query_code_json.json
+question_code_json.json
 /data/codesearch/
 /data_*/
 /model/*/

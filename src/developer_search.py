@@ -1,3 +1,4 @@
+import api_search
 import code_search
 from datetime import datetime
 from flask import Flask, render_template, jsonify, request
@@ -34,14 +35,19 @@ def index():
 def search(query):
     begin_time = time.time()
     print(query)
+    api_results, api_results_count = api_search.get_api_top_k(query, 5)
+    print(api_results)
     qa_results, qa_results_count = qa_search.get_qa_top_k(query, 10)
     print(qa_results)
     code_results, code_results_count = code_search.get_code_top_k(query, 10)
     print(code_results)
-    results_count = qa_results_count + code_results_count
+    results_count = api_results_count + qa_results_count + code_results_count
     new_results = []
     for result in qa_results:
         new_results.append({'data_type': 'qa', 'result_data': result})
+        app.logger.info(result)
+    for result in api_results:
+        new_results.append({'data_type': 'api', 'result_data': result})
         app.logger.info(result)
     for result in code_results:
         new_results.append({'data_type': 'code', 'result_data': result})
