@@ -35,6 +35,11 @@
 4. 切换到`src`目录(cd命令)
 5. 下载项目依赖(pip)：`pip install -r requirements.txt`
 6. 启动Flask：`python developer_search.py`
+7. 转发端口到浏览器：`http://localhost:5000`
+
+![](./images/developer-search.png)
+
+![](./images/search-result1.png)
 
 ## 工程结构
 
