@@ -413,6 +413,10 @@
 
 ## 数据获取
 
+- JavaAPI
+    - [Java 19.0.1 API Doc](https://docs.oracle.com/en/java/javase/19/docs/api/index.html)
+    - [Java 19.0.1 API Doc Download](https://www.oracle.com/java/technologies/javase-jdk19-doc-downloads.html)
+    - [Java API Data Extraction Repository](../../../java-api-extraction)
 - CodeSearchNet
     - [CodeSearchNet Challenge: Evaluating the State of Semantic Code Search](https://arxiv.org/abs/1909.09436)<br>![](./images/code-search-net.png)
     - [GitHub Repository](https://github.com/github/CodeSearchNet)
